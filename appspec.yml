@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/public/OrthoApp-Backend/
+    overwrite: true
+permissions:
+  - object: /
+    pattern: '**'
+    owner: root
+    group: root
+
+hooks:
+  ApplicationStart:
+    - location: application_start.sh
+      timeout: 500
+      runas: root
+ 
