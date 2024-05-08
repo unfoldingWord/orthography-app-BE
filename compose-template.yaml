@@ -1,0 +1,38 @@
+x-environment: &common-variables
+   PORT: 5000
+   MONGODB_URI: mongodb://<mongo-user>:<mongo-password>@mongodb-service:27017/orthoapp-qa?retryWrites=true&w=majority&authSource=admin&directConnection=true
+   SECRET: Orthoapp
+   BUCKET: <S3-bucket-name>
+   AWS_ACCESS_KEY_ID: <AWS Access Key ID>
+   AWS_SECRET_ACCESS_KEY: <AWS Secret Access Key>
+   # FOR REMOVING DEPRECIATION MESSAGE OF AWS-SDK package
+   AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE: 1 node helpers.js
+
+services:
+  orthoapp-be-service:
+    image: joppes/orthoapp:latest
+    ports:
+      - '5000:5000'
+    restart: on-failure
+    networks:
+       - network-service
+    environment:
+      <<: *common-variables
+      PORT: 5000
+
+  mongodb-service:
+    image: mongo:latest
+    ports:
+        - '27017:27017'
+    volumes:
+        - $PWD/data/db:/data/db
+    environment:
+         MONGO_INITDB_ROOT_USERNAME: <mongo-user>
+         MONGO_INITDB_ROOT_PASSWORD: <mongo-password>
+    networks:
+      - network-service
+    restart: on-failure
+
+networks:
+  network-service:
+    driver: bridge
