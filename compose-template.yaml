@@ -10,7 +10,7 @@ x-environment: &common-variables
 
 services:
   orthoapp-be-service:
-    image: joppes/orthoapp:latest
+    image: unfoldingword/orthography-app:latest
     ports:
       - '5000:5000'
     restart: on-failure
