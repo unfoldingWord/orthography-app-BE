@@ -50,10 +50,15 @@ curl -d '{"name":"English", "code":"en"}' -H 'Content-Type: application/json' ht
 ```
 Take note of the generated `_id`, that looks like `663b4d663937e0dd156aaef4`
 
+You can request the _id later on as well
+```bash
+curl -H 'Content-Type: application/json' http://localhost:5000/api/language/base
+```
+
 2) Outside of your backend directory, clone the image upload app (which is currently on a feature branch)
 ```
 mkdir ortho-upload && cd ortho-upload
-git clone -b upload-script git@github.com:unfoldingWord/orthography-app.git
+git clone -b upload-script git@github.com:unfoldingWord/orthography-app.git .
 ```
 
 3) Open the script `uploadImagesScript` and modify 
@@ -71,7 +76,12 @@ cp /path/to/original-images/* images/
 apt install nodejs
 ```
 
-6) Run the import script
+6) Install needed packages
+```
+npm install
+```
+
+7) Run the import script
 ```
 node uploadImagesScript.js
 ```
