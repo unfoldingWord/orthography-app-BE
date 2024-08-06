@@ -50,7 +50,7 @@ curl -d '{"name":"English", "code":"en"}' -H 'Content-Type: application/json' ht
 ```
 Take note of the generated `_id`, that looks like `663b4d663937e0dd156aaef4`
 
-You can request the _id later on as well
+You can request the `_id` later on as well
 ```bash
 curl -H 'Content-Type: application/json' http://localhost:5000/api/language/base
 ```
